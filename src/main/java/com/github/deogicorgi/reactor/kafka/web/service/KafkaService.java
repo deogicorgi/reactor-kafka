@@ -1,7 +1,6 @@
 package com.github.deogicorgi.reactor.kafka.web.service;
 
 import com.github.deogicorgi.reactor.kafka.producer.message.AbstractKafkaProduceMessage;
-import com.github.deogicorgi.reactor.kafka.producer.message.KafkaUriProduceMessage;
 import com.github.deogicorgi.reactor.kafka.producer.model.KafkaProduceResult;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,9 +22,13 @@ public class KafkaService {
 
     public Mono<KafkaProduceResult> send(AbstractKafkaProduceMessage message) {
         return producer.createOutbound()
-                .send(Mono.just(new ProducerRecord<>(message.getTopic(), null, message.getRequestedMessage())))  // 해당 topic으로 message 전송
+                // 지정된 토픽으로 메시지 전송
+                .send(Mono.just(new ProducerRecord<>(message.getTopic(), null, message.getRequestedMessage())))
+                // 전송완료 된 레코드를 Outbound로 리턴
                 .then()
-                .map(ret -> new KafkaProduceResult(message))
+                // 에러 없이 전송이 완료 되었을 경우
+                .map(v -> new KafkaProduceResult(message))
+                // 에러가 발생하였을 경우
                 .onErrorResume(e -> Mono.just(new KafkaProduceResult(message, e)));
     }
 

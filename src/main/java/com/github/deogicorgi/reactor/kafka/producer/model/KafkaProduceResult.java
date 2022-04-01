@@ -2,39 +2,64 @@ package com.github.deogicorgi.reactor.kafka.producer.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.github.deogicorgi.reactor.kafka.producer.message.AbstractKafkaProduceMessage;
+import com.github.deogicorgi.reactor.kafka.producer.values.ProduceMessageType;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
 
+/**
+ * 카프카 메시지 클래스
+ */
 @Getter
 public class KafkaProduceResult {
+
+    // 메시지 전송 상태 - true : 전송완료, false : 전송실패
     private Boolean status = true;
-    private String message;
+
+    // 메시지 전송 토픽
+    private String topic;
+
+    // 요청받은 메시지 타입 (uri, message)
+    private ProduceMessageType messageType;
+
+    // 요청받은 메시지 - URI 또는 JSON String
+    private String requestedMessage;
+
+    // 에러 - 전송과정 중 발생된 에러, 전송완료 일 경우 null
     @JsonIgnore
     private Throwable error = null;
+
+    // 에러 메시지 - 전송과정 중 발생된 에러, 전송완료 일 경우 null
     private String errorMessage = null;
+
+    // 메시지를 요청받은 시간
     private LocalDateTime requestedAt;
+
+    // 메시지를 처리한 시간
     private LocalDateTime producedAt;
 
     public KafkaProduceResult(AbstractKafkaProduceMessage message) {
-        this.setMessage(message);
+        this.setRequestedMessage(message);
     }
 
     public KafkaProduceResult(AbstractKafkaProduceMessage message, Throwable e) {
-        this.setMessage(message);
+        this.setRequestedMessage(message);
         this.status = false;
         this.error = e;
         this.errorMessage = e.getMessage();
+        this.producedAt = null;
     }
 
     public Boolean hasError() {
         return error != null;
     }
 
-    private void setMessage(AbstractKafkaProduceMessage message) {
-        this.message = message.getRequestedMessage();
+    private void setRequestedMessage(AbstractKafkaProduceMessage requestedMessage) {
+        this.topic = requestedMessage.getTopic();
+        this.messageType = requestedMessage.getType();
+        this.requestedMessage = requestedMessage.getRequestedMessage();
         this.producedAt = LocalDateTime.now();
-        this.requestedAt = message.getRequestedAt();
+        this.requestedAt = requestedMessage.getRequestedAt();
     }
 
 }
