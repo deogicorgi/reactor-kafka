@@ -1,6 +1,6 @@
 server:
   port: 18080
 
-kafka :
-  host : test
+kafka:
+  host: test
 
