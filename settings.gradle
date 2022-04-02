@@ -1,1 +1,5 @@
 rootProject.name = 'reactor-kafka'
+include 'producer'
+include 'consumer'
+include 'common'
+
