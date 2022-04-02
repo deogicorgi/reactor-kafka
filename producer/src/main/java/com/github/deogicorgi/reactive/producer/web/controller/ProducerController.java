@@ -1,7 +1,7 @@
 package com.github.deogicorgi.reactive.producer.web.controller;
 
-import com.github.deogicorgi.reactive.producer.message.AbstractKafkaProduceMessage;
-import com.github.deogicorgi.reactive.producer.model.KafkaProduceResult;
+import com.github.deogicorgi.reactive.common.message.AbstractKafkaProduceMessage;
+import com.github.deogicorgi.reactive.common.model.KafkaProduceResult;
 import com.github.deogicorgi.reactive.producer.web.service.ProduceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;

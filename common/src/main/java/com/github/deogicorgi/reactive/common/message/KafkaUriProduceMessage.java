@@ -1,6 +1,6 @@
-package com.github.deogicorgi.reactive.producer.message;
+package com.github.deogicorgi.reactive.common.message;
 
-import com.github.deogicorgi.reactive.producer.value.ProduceMessageType;
+import com.github.deogicorgi.reactive.common.value.ProduceMessageType;
 import lombok.Getter;
 import lombok.Setter;
 

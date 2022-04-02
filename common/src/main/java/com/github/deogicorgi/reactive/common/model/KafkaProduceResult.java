@@ -1,8 +1,8 @@
-package com.github.deogicorgi.reactive.producer.model;
+package com.github.deogicorgi.reactive.common.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.github.deogicorgi.reactive.producer.message.AbstractKafkaProduceMessage;
-import com.github.deogicorgi.reactive.producer.value.ProduceMessageType;
+import com.github.deogicorgi.reactive.common.message.AbstractKafkaProduceMessage;
+import com.github.deogicorgi.reactive.common.value.ProduceMessageType;
 import lombok.Getter;
 
 import java.time.LocalDateTime;

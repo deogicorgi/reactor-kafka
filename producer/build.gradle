@@ -28,13 +28,9 @@ dependencies {
     implementation 'io.springfox:springfox-boot-starter:3.0.0'
     implementation 'io.springfox:springfox-swagger-ui:3.0.0'
 
-    // logging
-    implementation('org.slf4j:jcl-over-slf4j')
-    implementation('ch.qos.logback:logback-classic')
-
-    // lombok
-    compileOnly 'org.projectlombok:lombok'
-    annotationProcessor 'org.projectlombok:lombok'
+//    // logging
+//    implementation('org.slf4j:jcl-over-slf4j')
+//    implementation('ch.qos.logback:logback-classic')
 
     // test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'

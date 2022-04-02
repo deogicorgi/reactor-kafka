@@ -1,7 +1,8 @@
 package com.github.deogicorgi.reactive.producer.web.service;
 
-import com.github.deogicorgi.reactive.producer.message.AbstractKafkaProduceMessage;
-import com.github.deogicorgi.reactive.producer.model.KafkaProduceResult;
+import com.github.deogicorgi.reactive.common.message.AbstractKafkaProduceMessage;
+import com.github.deogicorgi.reactive.common.model.KafkaProduceResult;
+import com.github.deogicorgi.reactive.producer.service.KafkaService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
