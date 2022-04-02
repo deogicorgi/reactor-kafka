@@ -1,5 +1,7 @@
 package com.github.deogicorgi.reactive.producer.config;
 
+import com.github.deogicorgi.reactive.producer.config.properties.KafkaProperties;
+import lombok.RequiredArgsConstructor;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.context.annotation.Bean;
@@ -16,10 +18,10 @@ import java.util.Map;
  * Kafka 설정
  */
 @Configuration
+@RequiredArgsConstructor
 public class KafkaConfig {
 
-    private String host;
-    private String groupId;
+    private final KafkaProperties properties;
 
     /******************************************************************
      ************************ Producer Options ************************
@@ -30,16 +32,15 @@ public class KafkaConfig {
         SenderOptions<String, Object> senderOptions = SenderOptions.create(getProducerProps());
         senderOptions.scheduler(Schedulers.parallel());
         senderOptions.closeTimeout(Duration.ofSeconds(5));
-
         return KafkaSender.create(senderOptions);
     }
 
     private Map<String, Object> getProducerProps() {
         return new HashMap<>() {{
-            put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, host);
+            put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, properties.getHosts());
             put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
             put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
-            put(ProducerConfig.MAX_BLOCK_MS_CONFIG, 2000);
+            put(ProducerConfig.MAX_BLOCK_MS_CONFIG, 1000);
         }};
     }
 }

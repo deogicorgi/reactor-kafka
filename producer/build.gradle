@@ -31,6 +31,7 @@ dependencies {
 //    // logging
 //    implementation('org.slf4j:jcl-over-slf4j')
 //    implementation('ch.qos.logback:logback-classic')
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 
     // test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
