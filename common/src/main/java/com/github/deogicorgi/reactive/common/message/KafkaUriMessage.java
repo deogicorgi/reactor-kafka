@@ -9,12 +9,12 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class KafkaUriProduceMessage extends AbstractKafkaProduceMessage {
+public class KafkaUriMessage extends AbstractKafkaMessage {
 
     // 요청 URI
     private String uri;
 
-    public KafkaUriProduceMessage() {
+    public KafkaUriMessage() {
         super.type = ProduceMessageType.URI;
     }
 

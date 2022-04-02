@@ -9,12 +9,12 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class KafkaBodyProduceMessage extends AbstractKafkaProduceMessage {
+public class KafkaBodyMessage extends AbstractKafkaMessage {
 
     // 요청 메시지
     private String message;
 
-    public KafkaBodyProduceMessage() {
+    public KafkaBodyMessage() {
         super.type = ProduceMessageType.Message;
     }
 

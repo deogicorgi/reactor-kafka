@@ -1,6 +1,6 @@
 package com.github.deogicorgi.reactive.producer.web.controller;
 
-import com.github.deogicorgi.reactive.common.message.AbstractKafkaProduceMessage;
+import com.github.deogicorgi.reactive.common.message.AbstractKafkaMessage;
 import com.github.deogicorgi.reactive.common.model.KafkaProduceResult;
 import com.github.deogicorgi.reactive.producer.web.service.ProduceService;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +21,7 @@ public class ProducerController {
     private final ProduceService produceService;
 
     @PostMapping
-    public Mono<KafkaProduceResult> send(@RequestBody AbstractKafkaProduceMessage message) {
+    public Mono<KafkaProduceResult> send(@RequestBody AbstractKafkaMessage message) {
         return produceService.produceMessage(message);
     }
 }

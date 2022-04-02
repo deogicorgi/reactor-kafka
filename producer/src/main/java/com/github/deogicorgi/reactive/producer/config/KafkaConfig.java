@@ -27,6 +27,7 @@ public class KafkaConfig {
      ************************ Producer Options ************************
      ******************************************************************/
 
+    // 기본 설정들로 구성
     @Bean("kafkaSender")
     public KafkaSender<String, Object> kafkaSender() {
         SenderOptions<String, Object> senderOptions = SenderOptions.create(getProducerProps());
@@ -35,6 +36,7 @@ public class KafkaConfig {
         return KafkaSender.create(senderOptions);
     }
 
+    // 프로듀서 옵션
     private Map<String, Object> getProducerProps() {
         return new HashMap<>() {{
             put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, properties.getHosts());

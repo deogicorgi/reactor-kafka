@@ -17,12 +17,12 @@ import java.time.LocalDateTime;
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
         property = "type",
-        defaultImpl = KafkaUriProduceMessage.class)
+        defaultImpl = KafkaUriMessage.class)
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = KafkaUriProduceMessage.class, names = {"uri", "Uri", "URI"}),
-        @JsonSubTypes.Type(value = KafkaBodyProduceMessage.class, names = {"message", "Message", "MESSAGE"})
+        @JsonSubTypes.Type(value = KafkaUriMessage.class, names = {"uri", "Uri", "URI"}),
+        @JsonSubTypes.Type(value = KafkaBodyMessage.class, names = {"message", "Message", "MESSAGE"})
 })
-public abstract class AbstractKafkaProduceMessage {
+public abstract class AbstractKafkaMessage {
 
     // 요청 토픽
     protected String topic;

@@ -1,14 +1,14 @@
 package com.github.deogicorgi.reactive.common.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.github.deogicorgi.reactive.common.message.AbstractKafkaProduceMessage;
+import com.github.deogicorgi.reactive.common.message.AbstractKafkaMessage;
 import com.github.deogicorgi.reactive.common.value.ProduceMessageType;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
 
 /**
- * 카프카 메시지 클래스
+ * 카프카 메시지 전송결과 클래스
  */
 @Getter
 public class KafkaProduceResult {
@@ -38,11 +38,11 @@ public class KafkaProduceResult {
     // 메시지를 처리한 시간
     private LocalDateTime producedAt;
 
-    public KafkaProduceResult(AbstractKafkaProduceMessage message) {
+    public KafkaProduceResult(AbstractKafkaMessage message) {
         this.setRequestedMessage(message);
     }
 
-    public KafkaProduceResult(AbstractKafkaProduceMessage message, Throwable e) {
+    public KafkaProduceResult(AbstractKafkaMessage message, Throwable e) {
         this.setRequestedMessage(message);
         this.status = false;
         this.error = e;
@@ -54,7 +54,7 @@ public class KafkaProduceResult {
         return error != null;
     }
 
-    private void setRequestedMessage(AbstractKafkaProduceMessage requestedMessage) {
+    private void setRequestedMessage(AbstractKafkaMessage requestedMessage) {
         this.topic = requestedMessage.getTopic();
         this.messageType = requestedMessage.getType();
         this.requestedMessage = requestedMessage.getRequestedMessage();
