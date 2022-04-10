@@ -10,13 +10,14 @@ Reactive Kafka with Spring Webflux
 How send a message?
 -------------
 
+
 The default Path is :
 ```
 curl --location --request POST 'localhost:18080/produce' \
 --header 'Content-Type: application/json' 
 ```
 
-###There are two types of messages you can send (using request body) :
+### There are two types of messages you can send (using request body) :
 1. URI Message type
 ```
 {
@@ -37,7 +38,7 @@ curl --location --request POST 'localhost:18080/produce' \
 }
 ```
 
-###Depending on the message you send, you will receive the following response :
+### Depending on the message you send, you will receive the following response :
 
 
 1. Success
