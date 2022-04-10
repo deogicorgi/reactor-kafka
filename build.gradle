@@ -1,33 +1,53 @@
-plugins {
-//    id 'org.springframework.boot' version '2.6.6'
-//    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-    id 'java'
+buildscript {
+    ext {
+        springBootVersion = '2.6.6'
+        kafkaCommonVersion ='1.0.0'
+    }
+
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://repo.spring.io/plugins-snapshot' }
+    }
+
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion")
+    }
 }
 
-group = 'com.github.deogicorgi'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+group = 'com.github.deogicorgi.reactor'
+version = '1.0.0'
 
-//configurations {
-//    compileOnly {
-//        extendsFrom annotationProcessor
-//    }
-//}
 
-repositories {
-    mavenCentral()
+allprojects {
+    apply plugin: 'idea'
+    apply plugin: 'java'
+
+    sourceCompatibility = '11'
+    targetCompatibility = '11'
+
+    repositories {
+        mavenCentral()
+    }
 }
 
 subprojects {
-    apply plugin: 'java'
-    apply plugin: 'idea'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    dependencyManagement {
+        dependencies {
+            dependencySet(group : 'org.springframework.boot', version : springBootVersion) {
+                entry 'spring-boot'
+                entry 'spring-boot-test'
+                entry 'spring-boot-starter'
+                entry 'spring-boot-starter-test'
+                entry 'spring-boot-test-autoconfigure'
+            }
+        }
+    }
 
     dependencies {
-        implementation 'org.springframework.boot:spring-boot-starter'
-
-        implementation 'org.slf4j:jcl-over-slf4j'
-        implementation 'ch.qos.logback:logback-classic'
-
         // lombok
         compileOnly 'org.projectlombok:lombok'
         annotationProcessor 'org.projectlombok:lombok'

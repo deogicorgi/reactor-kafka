@@ -1,12 +1,10 @@
 plugins {
     id 'java'
     id 'java-library'
-    id 'org.springframework.boot' version '2.6.4'
-    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 }
 
-group 'com.github.deogicorgi.reactive'
-version '0.0.1-SNAPSHOT'
+group 'com.github.deogicorgi.reactive.common'
+version '1.0.0'
 
 bootJar {
     enabled = false
@@ -14,10 +12,6 @@ bootJar {
 
 jar {
     enabled = true
-}
-
-repositories {
-    mavenCentral()
 }
 
 dependencies {
