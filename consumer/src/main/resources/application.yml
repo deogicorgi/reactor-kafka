@@ -1,11 +1,11 @@
 kafka:
-  hosts: deogicorgi.home:29092
+  hosts: localhost:9092
   receiver :
-    uri:
-      name : deogicorgiUri
-      topic : deogicorgi-uri
-      groupId : deogicorgi-uri-1
-    message:
-      name : deogicorgiMessage
-      topic : deogicorgi-message
-      groupId : deogicorgi-message-1
+    deogicorgi-topic-1:
+      name : deogicorgi-topic-1
+      topic : deogicorgi-topic-1
+      groupId : deogicorgi-topic-1
+    deogicorgi-topic-2:
+      name : deogicorgi-topic-2
+      topic : deogicorgi-topic-2
+      groupId : deogicorgi-topic-2

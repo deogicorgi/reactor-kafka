@@ -23,16 +23,16 @@ public class KafkaConfig {
 
     private final KafkaProperties properties;
 
-    // deogicorgi-uri 리시버
-    @Bean("uriMessageReceiver")
+    // deogicorgi-topic-1 리시버
+    @Bean("deogicorgiTopic1")
     public KafkaReceiver<Integer, String> uriMessageReceiver() throws Exception {
-        Map.Entry<String, KafkaReceiverProperty> deogicorgiUri = properties.getProperty("deogicorgiUri").orElse(null);
+        Map.Entry<String, KafkaReceiverProperty> propertyEntry = properties.getProperty("deogicorgi-topic-1").orElse(null);
 
-        if (ObjectUtils.isEmpty(deogicorgiUri)) {
+        if (ObjectUtils.isEmpty(propertyEntry)) {
             throw new Exception("property is null");
         }
 
-        KafkaReceiverProperty property = deogicorgiUri.getValue();
+        KafkaReceiverProperty property = propertyEntry.getValue();
 
         ReceiverOptions<Integer, String> receiverOptions =
                 ReceiverOptions.<Integer, String>create(getConsumerProps(property))
@@ -41,16 +41,16 @@ public class KafkaConfig {
         return KafkaReceiver.create(receiverOptions);
     }
 
-    // deogicorgi-message 리시버
-    @Bean("messageReceiver")
+    // deogicorgi-topic-2 리시버
+    @Bean("deogicorgiTopic2")
     public KafkaReceiver<Integer, String> messageReceiver() throws Exception {
-        Map.Entry<String, KafkaReceiverProperty> deogicorgiUri = properties.getProperty("deogicorgiMessage").orElse(null);
+        Map.Entry<String, KafkaReceiverProperty> propertyEntry = properties.getProperty("deogicorgi-topic-2").orElse(null);
 
-        if (ObjectUtils.isEmpty(deogicorgiUri)) {
+        if (ObjectUtils.isEmpty(propertyEntry)) {
             throw new Exception("property is null");
         }
 
-        KafkaReceiverProperty property = deogicorgiUri.getValue();
+        KafkaReceiverProperty property = propertyEntry.getValue();
 
         ReceiverOptions<Integer, String> receiverOptions =
                 ReceiverOptions.<Integer, String>create(getConsumerProps(property))

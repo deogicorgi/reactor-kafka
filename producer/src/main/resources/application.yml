@@ -2,5 +2,5 @@ server:
   port: 18080
 
 kafka:
-  hosts: deogicorgi.home:29092
+  hosts: localhost:9092
 
