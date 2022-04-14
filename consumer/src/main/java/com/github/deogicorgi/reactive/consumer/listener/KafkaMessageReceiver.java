@@ -13,18 +13,27 @@ import java.util.List;
 @Component
 public class KafkaMessageReceiver {
 
+    private final MessageBroker messageBroker;
+
     /**
      * KafkaMessageReceiver가 생성될 때 모든 카프카 리시버 시작
      */
-    public KafkaMessageReceiver(List<KafkaReceiver<Integer, String>> kafkaReceivers) {
+    public KafkaMessageReceiver(List<KafkaReceiver<Integer, String>> kafkaReceivers, MessageBroker messageBroker) {
+        this.messageBroker = messageBroker;
         for (KafkaReceiver<Integer, String> receiver : kafkaReceivers) {
             this.start(receiver);
         }
     }
 
     public void start(KafkaReceiver<Integer, String> receiver) {
-        receiver.receive().subscribe(record -> {
-            log.info("Kafka Reciever result : Topic >> [{}], message >> [{}], Offset >> [{}]", record.topic(), record.value(), record.receiverOffset());
-        });
+        receiver.receive()
+                .map(record -> {
+                    messageBroker.distribute();
+                    return record;
+                }).onErrorContinue((throwable, o) -> {
+                    log.error("{} --- {}",throwable.getClass().getSimpleName(), throwable.getMessage());
+
+                })
+                .subscribe();
     }
 }

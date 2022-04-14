@@ -22,6 +22,7 @@ public class ProducerController {
 
     @PostMapping
     public Mono<KafkaProduceResult> send(@RequestBody AbstractKafkaMessage message) {
+
         return produceService.produceMessage(message);
     }
 }
